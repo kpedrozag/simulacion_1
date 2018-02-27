@@ -68,6 +68,8 @@ def poisson(mean, a):
         x += 1
     return x-1
 
+# aa
+
 
 def pascal(n, p):
     x = 0
