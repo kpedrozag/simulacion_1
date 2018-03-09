@@ -4,23 +4,44 @@ import random
 
 def main():
     x = 1
-    while True:
+    hora = -1
+    arrival = []
+    service = []
+    while hora < 45:
         state, gx = random_x(x)
         x = state
-        print(gx)
-        res = int(input("\nDesea continuar? [0 -> no | 1 -> si]\n"))
-        if not res:
-            break
+        valor = poisson(0.58, gx)
+        print("hora: ", hora)
+        if valor < 5:
+            print("no. carros:", valor)
+            for i in range(valor):
+                state, gx = random_x(x)
+                x = state
+                valor_g = geometric(0.39, gx)
+                print("carro:", i, "tiempo servicio: ", valor_g)
+                arrival.append(hora)
+                service.append(valor_g)
+        else:
+            print("no. carros:", valor)
+        hora += 1
+        print("numero de carros:", len(arrival), len(service))
+    print(arrival)
+    print(service)
     print("fin")
+
+# [7, 49, 343, 2401, 5058, 974, 6817, 1482,
+# 9671, 278, 1942, 9656, 2765, 8614, 4445,
+# 5448, 7283, 2869, 2269, 895, 6264]
 
 
 def random_x(x):
-    a = 48271
+    # seed = a
+    seed = 1942
     m = 2147483647
-    q = m // a
-    r = m % a
+    q = m // seed
+    r = m % seed
 
-    t = a * (x % q) - r * (x / q)
+    t = seed * (x % q) - r * (x / q)
 
     if t > 0:
       x = t
@@ -30,8 +51,8 @@ def random_x(x):
     return x, x / m
 
 
-a = 0
 # ********************************************************
+a = 0
 
 
 def bernoulli(p):
@@ -48,9 +69,8 @@ def equilikely(a, b):
     return a + math.floor(u * (b - a + 1))
 
 
-def geometric(p):
-    x = 1
-    aux, u = random_x(x)
+def geometric(p, u):
+    a = 1  # valor minimo que puede tomar la variable aleatoria
     return a + math.ceil(math.log(1 - u) / math.log(p))
 
 
@@ -62,14 +82,17 @@ def binomial(n, p):
     return x
 
 
-def poisson(mean, a):
+def poisson(mean, ra):
+    a = 0.0
     x = 0
     while a < mean:
-        a += math.e
+        a += exponential(1.0, ra)
         x += 1
     return x-1
 
-# aa
+
+def exponential(ex, u):
+    return -ex * math.log(1.0 - u)
 
 
 def pascal(n, p):
