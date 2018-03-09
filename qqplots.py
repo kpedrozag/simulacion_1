@@ -13,6 +13,7 @@ plt.show()
 
 
 """
+http://connor-johnson.com/2014/12/31/the-pearson-chi-squared-test-with-python-and-r/
 N = 1200
 p = 0.53
 q = 1000
