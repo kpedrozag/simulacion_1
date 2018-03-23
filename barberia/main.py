@@ -7,6 +7,9 @@ class Client:
     arrival_t = 0
     service_t = 0
 
+    attended = False
+    attending = False
+
     def __init__(self, at, st):
         self.arrival_t = at
         self.service_t = st
@@ -46,17 +49,53 @@ def simulacion():
             clients.append(Client(hour, service_time()))
         hour += 1
 
-    asientos = queue.Queue(5)  # cola con 5 asientos
-    barber = Barber()  # barbero que esta o no ocupado
+    asientos = queue.Queue(5)  # cola con 5 asientos. inicialmente vacia
+    barber = Barber()  # barbero
     barber.set_busy(False)  # el barbero no esta ocupado al principio
-
-    i = 0
+    desertores_on = []
+    desertores_off = []
+    minutos = 0
+    it_c = 0
+    acu_max = 0
     while True:
+        hora = int(minutos/60)
+        if hora < 4:
+            if not barber.are_busy():
+                barber.set_busy(True)
+                max_service = clients[it_c].service_t
+                clients[it_c].attending = True
+                acu_max += max_service
+            else:
+                try:
+                    asientos.put(clients[it_c], block=False)
+                except queue.Full:
+                    desertores_on.append(clients[it_c])
+            if barber.are_busy() and minutos == acu_max:
+                pass
+        else:
+            desertores_off.append(clients[it_c])
+        minutos += 1
 
-        if number_clients[i] > 0 or (number_clients == 0 and not asientos.empty()):
 
 
-        minuto = 0
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -78,6 +117,24 @@ def simulacion():
 
 
 """
+    minutes = 0  # cuenta minuto por minuto
+    hour_lapse = 0
+    # current_hour = 0
+
+    while True:
+        current_hour = int(minutes / 60)
+        if current_hour == hour_lapse:
+            hour_lapse += 1
+
+
+
+
+        if current_hour < 4:
+
+            if number_clients[current_hour] > 0 or (number_clients[current_hour] == 0 and not asientos.empty()):
+
+                if (not barber.are_busy()) and asientos.empty():
+
 def simulacion():
     hour = 0
     clientes = [] # lista de clientes que llegan
