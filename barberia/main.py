@@ -52,12 +52,18 @@ def simulacion():
     asientos = queue.Queue(5)  # cola con 5 asientos. inicialmente vacia
     barber = Barber()  # barbero
     barber.set_busy(False)  # el barbero no esta ocupado al principio
+
     desertores_on = []
     desertores_off = []
+
     minutos = 0
     it_c = 0
     acu_max = 0
+
     while True:
+
+
+
         hora = int(minutos/60)
         if hora < 4:
             if not barber.are_busy():
