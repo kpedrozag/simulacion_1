@@ -2,8 +2,8 @@ import math
 
 
 def genera_fpmc():
-    a = 7  # semilla inicial
-    m = 103889  # valor m
+    a = 48271  # semilla inicial
+    m = 2147483647  # valor m
     i = 1  # iteraciones
     x = a  # el valor inicial de x es la semilla
     while x != 1:

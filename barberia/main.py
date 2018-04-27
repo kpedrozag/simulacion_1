@@ -53,6 +53,11 @@ def simulacion():
     barber = Barber()  # barbero
     barber.set_busy(False)  # el barbero no esta ocupado al principio
 
+
+
+
+
+"""
     desertores_on = []
     desertores_off = []
 
@@ -81,48 +86,11 @@ def simulacion():
         else:
             desertores_off.append(clients[it_c])
         minutos += 1
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-"""
+    
+    
+    
+    
+    
     minutes = 0  # cuenta minuto por minuto
     hour_lapse = 0
     # current_hour = 0
@@ -133,13 +101,14 @@ def simulacion():
             hour_lapse += 1
 
 
-
-
         if current_hour < 4:
 
             if number_clients[current_hour] > 0 or (number_clients[current_hour] == 0 and not asientos.empty()):
 
                 if (not barber.are_busy()) and asientos.empty():
+
+
+
 
 def simulacion():
     hour = 0
